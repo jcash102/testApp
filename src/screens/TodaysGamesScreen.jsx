@@ -20,7 +20,7 @@ class TodaysGamesScreen extends React.Component {
 
 	componentWillUnmount() {
 		console.log('unmounting');
-		clearInterval(timer);
+		clearInterval(this.state.timer);
 	}
 
 	callGames() {

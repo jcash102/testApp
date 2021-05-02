@@ -26,7 +26,7 @@ class TeamsScreen extends React.Component {
 
 	clickedTeam(team) {
 		console.log('go to team schedule', team);
-		this.props.navigation.navigate('TeamScheduleScreen', TeamScheduleScreen);
+		this.props.navigation.navigate('Schedule', { team: team });
 	}
 
 	renderItem = (team) => {

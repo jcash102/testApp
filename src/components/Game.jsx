@@ -38,7 +38,7 @@ class Game extends React.Component {
 			<View style={styles.container}>
 				{/* Team Names */}
 				<View style={styles.teams}>
-					<Text>&nbsp;</Text>
+					<Text>{moment(this.props.game.date).isSame(new Date(), 'day') ? 'Today' : moment(this.props.game.date).format('M/D/YY')}</Text>
 					<Text style={visitorTeamWon ? styles.bold : null}>{this.props.game.visitor_team.abbreviation}</Text>
 					<Text style={homeTeamWon ? styles.bold : null}>{this.props.game.home_team.abbreviation}</Text>
 				</View>

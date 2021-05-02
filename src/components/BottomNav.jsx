@@ -73,9 +73,9 @@ const Stack = createStackNavigator();
 const StackedBottomBar = () => {
 	return (
 		<NavigationContainer>
-			<Stack.Navigator headerMode="none">
+			<Stack.Navigator>
 				<Stack.Screen name="Home" component={HomeTabs} />
-				<Stack.Screen name="TeamScheduleScreen" component={TeamScheduleScreen} />
+				<Stack.Screen name="Schedule" component={TeamScheduleScreen} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);

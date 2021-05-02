@@ -1,8 +1,8 @@
 import React from 'react';
-import { useEffect } from 'react';
 import { View, Text, ScrollView, FlatList } from 'react-native';
 import { GetGames } from '../data/BBallAPI';
 import { Game } from '../components/Game';
+import LogoComponents from '../components/logos';
 
 class TeamScheduleScreen extends React.Component {
 	constructor({ route, navigation }) {
@@ -59,10 +59,12 @@ class TeamScheduleScreen extends React.Component {
 		return <Game game={game.item} />;
 	}
 	render() {
+		const Logo = LogoComponents['logo' + this.state.team.abbreviation];
 		return (
 			<ScrollView>
-				<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-					<Text style={{ fontWeight: 'bold', fontSize: 30, padding: 10 }}>{this.state.team.name} Schedule</Text>
+				<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', justifyContent: 'center' }}>
+					<Text style={{ fontWeight: 'bold', fontSize: 30, padding: 10 }}>{this.state.team.full_name} Schedule</Text>
+					<Logo size={100} />
 					<FlatList
 						data={this.state.games}
 						renderItem={this.renderItem}

@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import moment from 'moment';
+import { Card, ListItem, Button, Icon } from 'react-native-elements';
+import LogoComponents from './logos';
 
 class Game extends React.Component {
 	constructor(props) {
@@ -33,14 +35,21 @@ class Game extends React.Component {
 			);
 		} else {
 		}
-
+		const VisitorLogo = LogoComponents['logo' + this.props.game.visitor_team.abbreviation];
+		const HomeLogo = LogoComponents['logo' + this.props.game.home_team.abbreviation];
 		return (
-			<View style={styles.container}>
+			<Card wrapperStyle={styles.container}>
 				{/* Team Names */}
 				<View style={styles.teams}>
 					<Text>{moment(this.props.game.date).isSame(new Date(), 'day') ? 'Today' : moment(this.props.game.date).format('M/D/YY')}</Text>
-					<Text style={visitorTeamWon ? styles.bold : null}>{this.props.game.visitor_team.abbreviation}</Text>
-					<Text style={homeTeamWon ? styles.bold : null}>{this.props.game.home_team.abbreviation}</Text>
+					<View style={styles.teamLine}>
+						<VisitorLogo size={25} style={styles.logo} />
+						<Text style={visitorTeamWon ? styles.bold : null}>{this.props.game.visitor_team.abbreviation}</Text>
+					</View>
+					<View style={styles.teamLine}>
+						<HomeLogo size={25} style={styles.logo} />
+						<Text style={homeTeamWon ? styles.bold : null}>{this.props.game.home_team.abbreviation}</Text>
+					</View>
 				</View>
 				{/* time of game or quarter/time or final */}
 				<View style={styles.timeScore}>
@@ -48,7 +57,7 @@ class Game extends React.Component {
 					<Text style={styles.bold}>{this.props.game.status + (this.props.game.time !== '' ? '&nbsp;' + this.props.game.time : '')}</Text>
 					{showTimeScore}
 				</View>
-			</View>
+			</Card>
 		);
 	}
 }
@@ -57,16 +66,18 @@ export { Game };
 
 const styles = StyleSheet.create({
 	container: {
-		borderWidth: 1,
-		borderColor: 'red',
 		borderRadius: 4,
 		flexDirection: 'row',
 		width: 200,
 		justifyContent: 'space-between',
-		padding: 10,
+		// padding: 10,
 		marginBottom: 5,
 	},
-	teams: {},
+	teamLine: {
+		justifyContent: 'center',
+		alignItems: 'center',
+		flexDirection: 'row',
+	},
 	timeScore: {
 		justifyContent: 'center',
 		textAlign: 'center',
@@ -76,5 +87,8 @@ const styles = StyleSheet.create({
 	},
 	loserTeam: {
 		opacity: 0.6,
+	},
+	logo: {
+		marginRight: 5,
 	},
 });

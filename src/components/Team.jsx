@@ -8,7 +8,7 @@ class Team extends React.Component {
 	}
 	render() {
 		return (
-			<TouchableOpacity style={styles.container} onPress={() => alert('Pressed!')}>
+			<TouchableOpacity style={styles.container} onPress={() => this.props.teamClick(this.props.team.full_name)}>
 				<View>
 					<Text>{this.props.team.full_name}</Text>
 				</View>

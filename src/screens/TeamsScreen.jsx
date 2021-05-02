@@ -37,7 +37,7 @@ class TeamsScreen extends React.Component {
 		return (
 			<ScrollView>
 				<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-					<Text style={{ fontWeight: 'bold', fontSize: 30, padding: 10 }}>Today's Games</Text>
+					<Text style={{ fontWeight: 'bold', fontSize: 30, padding: 10 }}>NBA Teams</Text>
 					<FlatList data={this.state.teams} renderItem={this.renderItem} keyExtractor={(item) => item.id.toString()} />
 					{/* {this.state.teams.map((team) => (
 						<Team key={team.id} team={team} />

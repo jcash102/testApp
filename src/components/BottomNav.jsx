@@ -9,36 +9,6 @@ import { TeamsScreen } from '../Screens/TeamsScreen';
 import { TeamScheduleScreen } from '../Screens/TeamScheduleScreen';
 
 const Tab = createBottomTabNavigator();
-const BottomBar = () => {
-	return (
-		<NavigationContainer>
-			<Tab.Navigator
-				screenOptions={({ route }) => ({
-					tabBarIcon: ({ focused, color, size }) => {
-						let iconName;
-
-						if (route.name === 'Today') {
-							iconName = focused ? 'calendar' : 'calendar-outline';
-						} else if (route.name === 'Teams') {
-							iconName = focused ? 'list' : 'list-outline';
-						}
-
-						// You can return any component that you like here!
-						return <Ionicons name={iconName} size={size} color={color} />;
-					},
-				})}
-				tabBarOptions={{
-					activeTintColor: '#AB0E00',
-					inactiveTintColor: 'gray',
-					keyboardHidesTabBar: true,
-				}}
-			>
-				<Tab.Screen name="Today" component={TodaysGamesScreen} />
-				<Tab.Screen name="Teams" component={TeamsScreen} />
-			</Tab.Navigator>
-		</NavigationContainer>
-	);
-};
 
 function HomeTabs() {
 	return (
@@ -47,13 +17,12 @@ function HomeTabs() {
 				tabBarIcon: ({ focused, color, size }) => {
 					let iconName;
 
-					if (route.name === 'Today') {
+					if (route.name === "Today's Games") {
 						iconName = focused ? 'calendar' : 'calendar-outline';
 					} else if (route.name === 'Teams') {
 						iconName = focused ? 'list' : 'list-outline';
 					}
 
-					// You can return any component that you like here!
 					return <Ionicons name={iconName} size={size} color={color} />;
 				},
 			})}
@@ -63,7 +32,7 @@ function HomeTabs() {
 				keyboardHidesTabBar: true,
 			}}
 		>
-			<Tab.Screen name="Today" component={TodaysGamesScreen} />
+			<Tab.Screen name="Today's Games" component={TodaysGamesScreen} />
 			<Tab.Screen name="Teams" component={TeamsScreen} />
 		</Tab.Navigator>
 	);
@@ -81,4 +50,4 @@ const StackedBottomBar = () => {
 	);
 };
 
-export { BottomBar, StackedBottomBar };
+export { StackedBottomBar };

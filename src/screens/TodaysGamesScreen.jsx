@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 import { View, Text, ScrollView, FlatList } from 'react-native';
 import { GetGames } from '../data/BBallAPI';
 import { Game } from '../components/Game';
+import { Icon, Button } from 'react-native-elements';
+import moment from 'moment';
 
 class TodaysGamesScreen extends React.Component {
 	constructor() {
@@ -11,6 +13,7 @@ class TodaysGamesScreen extends React.Component {
 		this.state = {
 			games: [],
 			timer: null,
+			currentGameDateSelected: moment().format('YYYY-MM-DD'),
 		};
 	}
 	componentDidMount() {
@@ -23,8 +26,9 @@ class TodaysGamesScreen extends React.Component {
 		clearInterval(this.state.timer);
 	}
 
-	callGames() {
-		GetGames().then((res) => {
+	callGames(gameDate) {
+		console.log('gamedate', gameDate);
+		GetGames(gameDate).then((res) => {
 			this.setState({ games: res });
 
 			//checks if status of game has started then refresh game data every minute
@@ -36,15 +40,32 @@ class TodaysGamesScreen extends React.Component {
 			}
 		});
 	}
+	showMoreGames(daysToAdd) {
+		let sendGameDate = moment(this.state.currentGameDateSelected).add(daysToAdd, 'days').format('YYYY-MM-DD');
+		this.setState({ currentGameDateSelected: sendGameDate });
+		console.log(sendGameDate);
+		this.callGames(sendGameDate);
+	}
+	goToToday() {
+		this.setState({ currentGameDateSelected: new Date() });
+		this.callGames();
+	}
 
 	renderItem(game) {
 		return <Game game={game.item} />;
 	}
 	render() {
+		let isSelectedDateToday = moment(this.state.currentGameDateSelected).isSame(new Date(), 'day');
 		return (
 			<ScrollView>
 				<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-					<Text style={{ fontWeight: 'bold', fontSize: 30, padding: 10 }}>Today's Games</Text>
+					<View style={{ flexDirection: 'row' }}>
+						<Icon raised name="chevron-circle-left" type="font-awesome" color="#AB0E00" onPress={() => this.showMoreGames(-1)} />
+						<Text style={{ fontWeight: 'bold', fontSize: 30, padding: 10 }}>{isSelectedDateToday ? "Today's" : moment(this.state.currentGameDateSelected).format('M/D/YY')} Games</Text>
+						<Icon raised name="chevron-circle-right" type="font-awesome" color="#AB0E00" onPress={() => this.showMoreGames(1)} />
+					</View>
+					{!isSelectedDateToday && <Button title="Go to Today's Games" type="outline" onPress={() => this.goToToday()} />}
+
 					<FlatList data={this.state.games} renderItem={this.renderItem} keyExtractor={(item) => item.id.toString()} />
 				</View>
 			</ScrollView>

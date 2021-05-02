@@ -54,7 +54,7 @@ class Game extends React.Component {
 				{/* time of game or quarter/time or final */}
 				<View style={styles.timeScore}>
 					{/* <Text>{moment(props.game.date).format('h:mm a')}</Text> */}
-					<Text style={styles.bold}>{this.props.game.status + (this.props.game.time !== '' ? '&nbsp;' + this.props.game.time : '')}</Text>
+					<Text style={styles.bold}>{this.props.game.status + (this.props.game.time !== '' ? ' ' + this.props.game.time : '')}</Text>
 					{showTimeScore}
 				</View>
 			</Card>

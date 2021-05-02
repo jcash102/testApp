@@ -1,4 +1,3 @@
-// import axios from 'axios';
 import moment from 'moment';
 
 const API_URL = 'https://www.balldontlie.io/api/v1/';
@@ -12,7 +11,7 @@ export function GetResponse(response) {
 }
 
 const GetGames = (gameDate, page, teamID) => {
-	var sendGameDate;
+	var sendGameDate = gameDate;
 	var sendTeamID = '';
 	let sendPage = 1;
 	if (page !== undefined && page !== null) {
@@ -44,12 +43,18 @@ const GetGames = (gameDate, page, teamID) => {
 					return a.id - b.id;
 				}
 			});
-			console.log('sorted', res);
 
 			//adding status any games in this array have started playing but are not final
 			let gamesStarted = false;
 			for (var i = 0; i < res.length; i++) {
-				if (res[i].period > 0 && res[i].status.toUpperCase() !== 'FINAL') gamesStarted = true;
+				//bad data using midnight for each game time and moment is parsing it as previous day
+				//adding day to fix
+				res[i].date = moment(res[i].date).add(1, 'days');
+
+				if (res[i].period > 0 && res[i].status.toUpperCase() !== 'FINAL') {
+					gamesStarted = true;
+					//break;
+				}
 			}
 			res.gamesStarted = gamesStarted;
 			console.log(res);

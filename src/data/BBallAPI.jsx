@@ -19,7 +19,6 @@ const GetGames = (gameDate, page, teamID) => {
 	}
 	if (gameDate == null || gameDate == undefined) {
 		sendGameDate = moment().format('YYYY-MM-DD');
-		console.log('sendGameDate', sendGameDate);
 	}
 	let url;
 
@@ -57,7 +56,7 @@ const GetGames = (gameDate, page, teamID) => {
 				}
 			}
 			res.gamesStarted = gamesStarted;
-			console.log(res);
+
 			return res;
 		});
 };

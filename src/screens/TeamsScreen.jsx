@@ -14,7 +14,7 @@ class TeamsScreen extends React.Component {
 		this.clickedTeam = this.clickedTeam.bind(this);
 	}
 	componentDidMount() {
-		console.log('this.props', this.props);
+		// console.log('this.props', this.props);
 		this.callTeams();
 	}
 
@@ -25,7 +25,7 @@ class TeamsScreen extends React.Component {
 	}
 
 	clickedTeam(team) {
-		console.log('go to team schedule', team);
+		// console.log('go to team schedule', team);
 		this.props.navigation.navigate('Schedule', { team: team });
 	}
 
@@ -35,15 +35,15 @@ class TeamsScreen extends React.Component {
 
 	render() {
 		return (
-			<ScrollView>
-				<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-					<Text style={{ fontWeight: 'bold', fontSize: 30, padding: 10 }}>NBA Teams</Text>
-					<FlatList data={this.state.teams} renderItem={this.renderItem} keyExtractor={(item) => item.id.toString()} />
-					{/* {this.state.teams.map((team) => (
+			// <ScrollView>
+			<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+				<Text style={{ fontWeight: 'bold', fontSize: 30, padding: 10 }}>NBA Teams</Text>
+				<FlatList data={this.state.teams} renderItem={this.renderItem} keyExtractor={(item) => item.id.toString()} />
+				{/* {this.state.teams.map((team) => (
 						<Team key={team.id} team={team} />
 					))} */}
-				</View>
-			</ScrollView>
+			</View>
+			// </ScrollView>
 		);
 	}
 }

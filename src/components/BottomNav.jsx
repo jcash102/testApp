@@ -4,9 +4,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { TodaysGamesScreen } from '../Screens/TodaysGamesScreen';
-import { TeamsScreen } from '../Screens/TeamsScreen';
-import { TeamScheduleScreen } from '../Screens/TeamScheduleScreen';
+import { TodaysGamesScreen } from '../screens/TodaysGamesScreen';
+import { TeamsScreen } from '../screens/TeamsScreen';
+import { TeamScheduleScreen } from '../screens/TeamScheduleScreen';
 
 const Tab = createBottomTabNavigator();
 

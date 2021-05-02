@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, ScrollView, FlatList } from 'react-native';
 import { GetGames } from '../data/BBallAPI';
 import { Game } from '../components/Game';
-import LogoComponents from '../components/logos';
+import LogoComponents from '../components/Logos';
 
 class TeamScheduleScreen extends React.Component {
 	constructor({ route, navigation }) {
@@ -16,14 +16,10 @@ class TeamScheduleScreen extends React.Component {
 		};
 	}
 	componentDidMount() {
-		console.log(this.props, this.state.teamID);
 		this.callGames();
 	}
 
-	componentWillUnmount() {
-		console.log('unmounting');
-		// clearInterval(timer);
-	}
+	componentWillUnmount() {}
 	handleLoadMore = () => {
 		this.setState(
 			(prevState, nextProps) => ({
@@ -59,25 +55,25 @@ class TeamScheduleScreen extends React.Component {
 		return <Game game={game.item} />;
 	}
 	render() {
-		const Logo = LogoComponents['logo' + this.state.team.abbreviation];
+		// const Logo = LogoComponents['Logo' + this.state.team.abbreviation];
 		return (
-			<ScrollView>
-				<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', justifyContent: 'center' }}>
-					<Text style={{ fontWeight: 'bold', fontSize: 30, padding: 10 }}>{this.state.team.full_name} Schedule</Text>
-					<Logo size={100} />
-					<FlatList
-						data={this.state.games}
-						renderItem={this.renderItem}
-						keyExtractor={(item, index) => item.id.toString()}
-						onEndReached={() => {
-							console.log('load more');
-							this.handleLoadMore();
-						}}
-						onEndReachedThreshold={0.5}
-						initialNumToRender={10}
-					/>
-				</View>
-			</ScrollView>
+			// <ScrollView>
+			<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', justifyContent: 'center' }}>
+				<Text style={{ fontWeight: 'bold', fontSize: 30, padding: 10 }}>{this.state.team.full_name} Schedule</Text>
+				{/* <Logo size={100} /> */}
+				<FlatList
+					data={this.state.games}
+					renderItem={this.renderItem}
+					keyExtractor={(item, index) => item.id.toString()}
+					onEndReached={() => {
+						console.log('load more');
+						this.handleLoadMore();
+					}}
+					onEndReachedThreshold={0.5}
+					initialNumToRender={10}
+				/>
+			</View>
+			// </ScrollView>
 		);
 	}
 }

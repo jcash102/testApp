@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import { BottomBar, StackedBottomBar } from './src/Components/BottomNav';
+import { StackedBottomBar } from './src/components/BottomNav';
 import { ThemeProvider } from 'react-native-elements';
 
 const theme = {

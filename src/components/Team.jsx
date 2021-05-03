@@ -1,20 +1,19 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Card, ListItem, Button, Icon } from 'react-native-elements';
-import LogoComponents from './Logos';
 
+import { Logo } from './Logos';
 class Team extends React.Component {
 	constructor(props) {
 		super(props);
 	}
 	render() {
-		const Logo = LogoComponents['Logo' + this.props.team.abbreviation];
 		return (
 			<TouchableOpacity onPress={() => this.props.teamClick(this.props.team)}>
 				<Card wrapperStyle={styles.container}>
 					<View style={styles.teamContainer}>
 						<Text style={styles.team}>{this.props.team.full_name}</Text>
-						{/* <Logo size={50} /> */}
+						<Logo team={this.props.team} size={50} />
 					</View>
 				</Card>
 			</TouchableOpacity>
@@ -28,7 +27,7 @@ const styles = StyleSheet.create({
 	container: {
 		borderRadius: 4,
 		flexDirection: 'row',
-		width: 200,
+		width: 240,
 		justifyContent: 'space-between',
 
 		marginBottom: 5,
@@ -53,5 +52,9 @@ const styles = StyleSheet.create({
 	},
 	loserTeam: {
 		opacity: 0.6,
+	},
+	tinyLogo: {
+		width: 50,
+		height: 50,
 	},
 });

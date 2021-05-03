@@ -2,8 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import moment from 'moment';
 import { Card, ListItem, Button, Icon } from 'react-native-elements';
-import LogoComponents from './Logos';
-
+import { Logo } from './Logos';
 class Game extends React.Component {
 	constructor(props) {
 		super(props);
@@ -33,28 +32,26 @@ class Game extends React.Component {
 					<Text style={homeTeamWon ? styles.bold : null}>{this.props.game.home_team_score}</Text>
 				</View>
 			);
-		} else {
 		}
-		const VisitorLogo = LogoComponents['Logo' + this.props.game.visitor_team.abbreviation];
-		const HomeLogo = LogoComponents['Logo' + this.props.game.home_team.abbreviation];
+
 		return (
 			<Card wrapperStyle={styles.container}>
 				{/* Team Names */}
 				<View style={styles.teams}>
-					<Text>{moment(this.props.game.date).isSame(new Date(), 'day') ? 'Today' : moment(this.props.game.date).format('M/D/YY')}</Text>
+					<Text style={styles.statusLine}>{moment(this.props.game.date).isSame(new Date(), 'day') ? 'Today' : moment(this.props.game.date).format('M/D/YY')}</Text>
 					<View style={styles.teamLine}>
-						{/* <VisitorLogo size={25} style={styles.logo} /> */}
+						<Logo team={this.props.game.visitor_team} size={25} />
 						<Text style={visitorTeamWon ? styles.bold : null}>{this.props.game.visitor_team.abbreviation}</Text>
 					</View>
 					<View style={styles.teamLine}>
-						{/* <HomeLogo size={25} style={styles.logo} /> */}
+						<Logo team={this.props.game.home_team} size={25} />
 						<Text style={homeTeamWon ? styles.bold : null}>{this.props.game.home_team.abbreviation}</Text>
 					</View>
 				</View>
 				{/* time of game or quarter/time or final */}
 				<View style={styles.timeScore}>
 					{/* <Text>{moment(props.game.date).format('h:mm a')}</Text> */}
-					<Text style={styles.bold}>{this.props.game.status + (this.props.game.time !== '' ? ' ' + this.props.game.time : '')}</Text>
+					<Text style={[styles.bold, styles.statusLine]}>{this.props.game.status + (this.props.game.time !== '' ? ' ' + this.props.game.time : '')}</Text>
 					{showTimeScore}
 				</View>
 			</Card>
@@ -68,10 +65,13 @@ const styles = StyleSheet.create({
 	container: {
 		borderRadius: 4,
 		flexDirection: 'row',
-		width: 200,
+		width: 240,
 		justifyContent: 'space-between',
 		// padding: 10,
 		marginBottom: 5,
+	},
+	statusLine: {
+		paddingBottom: 5,
 	},
 	teamLine: {
 		justifyContent: 'center',
